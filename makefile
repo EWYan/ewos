@@ -1,12 +1,11 @@
 TARGET = aarch64-unknown-none
-SFILES = $(wildcard *.S)
+SFILES = $(wildcard ./boot/*.S)
 OFILES = $(SFILES:.S=.o)
 GCCPATH = ../gcc-arm-10.3-2021.07-x86_64-aarch64-none-elf/bin
 GCCFLAGS = -Wall -O2 -ffreestanding -nostdinc -nostdlib -nostartfiles
-RUST_PART := target/$(TARGET)/debug/libewos.a
 
-$(info $(SFILES))
-$(info $(OFILES))
+RUST_PART := target/$(TARGET)/release/libewos.a
+
 .PHONY: all clean
 
 $(OFILES): $(SFILES)
@@ -14,13 +13,14 @@ $(OFILES): $(SFILES)
 
 all: kernel $(OFILES) $(RUST_PART)
 	@$(GCCPATH)/aarch64-none-elf-ld -nostdlib $(OFILES) $(RUST_PART) -T linker.ld -o ewos.elf
-	@aarch64-linux-gnu-objdump -D ./ewos.elf > ewos.asm
-	@aarch64-linux-gnu-objcopy -O binary ./ewos.elf ./kernel8.img
+	@$(GCCPATH)/aarch64-none-elf-objdump -D ./ewos.elf > ewos.asm
+	@$(GCCPATH)/aarch64-none-elf-objcopy -O binary ./ewos.elf ./kernel8.img
 	@echo build completed!
 
 kernel:
-	@cargo build --target $(TARGET)
+	@cargo build --release --target $(TARGET)
 
 clean:
 	@rm -rf target/
-	@rm -rf *.o *.elf
+	@rm -rf boot/*.o
+	@rm -rf *.elf *.asm *.img

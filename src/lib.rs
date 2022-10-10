@@ -1,8 +1,10 @@
 #![no_std]
 #![no_main]
+
 #![allow(non_snake_case)]
-use core::arch::asm;
-#[allow(dead_code)]
+#![allow(dead_code)]
+
+// use core::arch::asm;
 use core::panic::PanicInfo;
 
 const PERIPHERAL_BASE: u32 = 0xFE000000;
