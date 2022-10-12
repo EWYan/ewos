@@ -9,15 +9,15 @@ use core::panic::PanicInfo;
 
 const PERIPHERAL_BASE: u32 = 0xFE000000;
 const AUX_BASE: u32 = PERIPHERAL_BASE + 0x215000;
-const AUX_ENABLES: u32 = AUX_BASE + 4;
-const AUX_MU_IO_REG: u32 = AUX_BASE + 64;
-const AUX_MU_IER_REG: u32 = AUX_BASE + 68;
-const AUX_MU_IIR_REG: u32 = AUX_BASE + 72;
-const AUX_MU_LCR_REG: u32 = AUX_BASE + 76;
-const AUX_MU_MCR_REG: u32 = AUX_BASE + 80;
-const AUX_MU_LSR_REG: u32 = AUX_BASE + 84;
-const AUX_MU_CNTL_REG: u32 = AUX_BASE + 96;
-const AUX_MU_BAUD_REG: u32 = AUX_BASE + 104;
+const AUX_ENABLES: u32 = AUX_BASE + 0x04;
+const AUX_MU_IO_REG: u32 = AUX_BASE + 0x40;
+const AUX_MU_IER_REG: u32 = AUX_BASE + 0x44;
+const AUX_MU_IIR_REG: u32 = AUX_BASE + 0x48;
+const AUX_MU_LCR_REG: u32 = AUX_BASE + 0x4C;
+const AUX_MU_MCR_REG: u32 = AUX_BASE + 0x50;
+const AUX_MU_LSR_REG: u32 = AUX_BASE + 0x54;
+const AUX_MU_CNTL_REG: u32 = AUX_BASE + 0x60;
+const AUX_MU_BAUD_REG: u32 = AUX_BASE + 0x68;
 const AUX_UART_CLOCK: u32 = 500000000;
 const UART_MAX_QUEUE: u32 = 16 * 1024;
 
