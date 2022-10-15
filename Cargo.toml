@@ -1,11 +1,21 @@
 [package]
-name = "ewos"
+name = "mingo"
 version = "0.1.0"
+authors = ["juzi"]
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+##The lto setting controls the -C lto flag which controls LLVM's link time optimizations. 
+##LTO can produce better optimized code, using whole-program analysis, at the cost of longer linking time.
+[profile.release]
+lto = true
 
-[lib]
-crate-type = ["staticlib"]
+[features]
+default = []
+bsp_rpi4 = []
+
+[[bin]]
+name = "kernel"
+path = "src/main.rs"
+
 
 [dependencies]

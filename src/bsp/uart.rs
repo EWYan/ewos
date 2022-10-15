@@ -1,3 +1,4 @@
+// uart source code
 const PERIPHERAL_BASE: u32 = 0xFE000000;
 const AUX_BASE: u32 = PERIPHERAL_BASE + 0x215000;
 const AUX_ENABLES: u32 = AUX_BASE + 0x04;
@@ -19,7 +20,6 @@ const GPPUPPDN0: u32 = PERIPHERAL_BASE + 0x2000E4;
 
 const GPIO_MAX_PIN: u32 = 53;
 const GPIO_FUNCTION_ALT5: u32 = 2;
-
 
 pub fn uart_init() {
     //enable UART1
@@ -77,9 +77,9 @@ fn gpio_call(pin_number: u32, value: u32, base: u32, field_size: u32, field_max:
         if value > field_mask {
             0
         } else {
-            let num_fields:u32 = 32 / field_size;
-            let reg:u32 = base + ((pin_number / num_fields) * 4);
-            let shift:u32 = (pin_number % num_fields) * field_size;
+            let num_fields: u32 = 32 / field_size;
+            let reg: u32 = base + ((pin_number / num_fields) * 4);
+            let shift: u32 = (pin_number % num_fields) * field_size;
 
             let mut curval: u32 = mmio_read(reg);
             curval &= !(field_mask << shift);
