@@ -1,21 +1,17 @@
+#![feature(asm_const)]
+#![feature(format_args_nl)]
 #![no_main]
 #![no_std]
 
 mod bsp;
 mod cpu;
 mod panic_wait;
-
-use crate::bsp::uart::*;
+mod print;
+use crate::bsp::rpi4::*;
 // main for rust code
 pub fn main() -> ! {
-    uart_init();
-    uart_write_text("Hello world!\n");
-    loop {
-        let read = uart_read_byte();
-        if read != 0x00 {
-            uart_write_byte(read);
-            uart_write_byte('\n' as u8);
-            uart_write_byte('\r' as u8);
-        }
-    }
+    uart::uart_init();
+    uart::uart_write_text("Hello world!\n\r");
+    println!("see nothing !!");
+    loop {}
 }

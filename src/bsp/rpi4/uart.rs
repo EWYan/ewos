@@ -1,8 +1,6 @@
 // uart source code
 // 0x7e215000 Auxiliary reg base address -> 0xFE21_5000
 
-
-
 const PERIPHERAL_BASE: u32 = 0xFE00_0000;
 const AUX_BASE: u32 = PERIPHERAL_BASE + 0x21_5000;
 const AUX_ENABLES: u32 = AUX_BASE + 0x04;
@@ -118,12 +116,12 @@ pub fn uart_write_text(buffer: &str) {
     }
 }
 
-pub fn uart_read_byte() -> u8 {
-    loop {
-        let condi = uart_is_ready();
-        if condi != 0 {
-            break;
-        }
-    }
-    mmio_read(AUX_MU_IO_REG) as u8
-}
+// pub fn uart_read_byte() -> u8 {
+//     loop {
+//         let condi = uart_is_ready();
+//         if condi != 0 {
+//             break;
+//         }
+//     }
+//     mmio_read(AUX_MU_IO_REG) as u8
+// }

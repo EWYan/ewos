@@ -5,7 +5,7 @@ SECTIONS
     . = 0x80000;
     .text :
     {
-        *(.text._start)
+        KEEP(*(.text._start))
         *(.text*)
     }
     . = ALIGN(4096);

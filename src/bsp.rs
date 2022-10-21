@@ -1,5 +1,5 @@
 // mcal mods
 
-pub mod uart;
+pub mod rpi4;
 
-pub use uart::*;
+pub use rpi4::*;
