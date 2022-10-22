@@ -32,7 +32,8 @@ KERNEL_ELF_DEPS = $(filter-out %: ,$(file < $(KERNEL_ELF).d)) $(LAST_BUILD_CONFI
 ##--------------------------------------------------------------------------------------------------
 RUSTFLAGS = $(RUSTC_MISC_ARGS)                   \
     -C link-arg=--library-path=$(LD_SCRIPT_PATH) \
-    -C link-arg=--script=$(KERNEL_LINKER_SCRIPT)
+    -C link-arg=--script=$(KERNEL_LINKER_SCRIPT) 
+	
 
 RUSTFLAGS_PEDANTIC = $(RUSTFLAGS)
 
@@ -96,7 +97,7 @@ clean:
 ## Run readelf
 ##------------------------------------------------------------------------------
 readelf: $(KERNEL_ELF)
-	@$(DOCKER_TOOLS) $(READELF_BINARY) --headers $(KERNEL_ELF) 
+	@$(DOCKER_TOOLS) $(READELF_BINARY) --headers $(KERNEL_ELF) > kernel.elf.header
 
 ##------------------------------------------------------------------------------
 ## Run objdump
@@ -110,5 +111,5 @@ objdump: $(KERNEL_ELF)
 ## Run nm
 ##------------------------------------------------------------------------------
 nm: $(KERNEL_ELF)
-	@$(DOCKER_TOOLS) $(NM_BINARY) --demangle --print-size $(KERNEL_ELF) | sort | rustfilt
+	@$(DOCKER_TOOLS) $(NM_BINARY) --demangle --print-size $(KERNEL_ELF) | sort | rustfilt > kernel.nm
 

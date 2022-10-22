@@ -1,6 +1,6 @@
 // uart source code
 // 0x7e215000 Auxiliary reg base address -> 0xFE21_5000
-
+#![allow(dead_code)]
 const PERIPHERAL_BASE: u32 = 0xFE00_0000;
 const AUX_BASE: u32 = PERIPHERAL_BASE + 0x21_5000;
 const AUX_ENABLES: u32 = AUX_BASE + 0x04;
